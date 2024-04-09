@@ -4,13 +4,15 @@ export const NavbarContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #333;
+  background-color: #000;
   padding: 0.5rem 1rem;
+  border-radius: 10px;
 `;
 
 export const NavbarLinks = styled.div`
   a {
     color: white;
+
     text-decoration: none;
     margin: 0 1rem;
 
@@ -25,6 +27,7 @@ export const LoginButton = styled.button`
   color: white;
   border: none;
   padding: 0.5rem 1rem;
+  border-radius: 5px;
   cursor: pointer;
 
   &:hover {

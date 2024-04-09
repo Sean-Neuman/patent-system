@@ -3,11 +3,14 @@ import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   body {
-    background-color: ${({ theme }) => theme.body};
+    background-color: ${({ theme }) => theme.background};
     color: ${({ theme }) => theme.text};
-    //transition: all 0.50s linear;
   }
-  div {
-    
+  textarea {
+    resize: vertical;
+    background-color: ${({ theme }) => theme.background};
+  }
+  input {
+    background-color: ${({ theme }) => theme.background};
   }
 `;

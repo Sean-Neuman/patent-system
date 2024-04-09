@@ -1,8 +1,9 @@
 import styled from "styled-components";
+import { theme } from "../styles/theme";
 
 export const FormContainer = styled.div`
   padding: 2rem;
-  background-color: #f8f9fa;
+  background-color: ${({ theme }) => theme.secondary};
   border-radius: 8px;
   max-width: 500px;
   margin: 20px auto;

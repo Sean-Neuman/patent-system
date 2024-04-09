@@ -7,9 +7,10 @@ export const lightTheme = {
   };
   
   export const darkTheme = {
-    body: '#363537',
+    backround: '#172a21',
     text: '#FAFAFA',
-    toggleBorder: '#6B8096',
-    background: '#999',
+    headings: '#FAFAFA',
+    secondary: '#334f48',
+    accent: '#FFD700',
   };
   
