@@ -22,7 +22,7 @@ export default function Home() {
     }
   };
   return (
-    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+    <ThemeProvider theme={darkTheme}>
       <>
         <Head>
           <title>Project Einstien</title>
@@ -32,7 +32,7 @@ export default function Home() {
         </Head>
         <GlobalStyles />
         <div>
-          <button onClick={toggleTheme}>Toggle Theme</button>
+          {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
           <Navbar />
           <AboutPage />
           {/* More components like Footer can be added here */}

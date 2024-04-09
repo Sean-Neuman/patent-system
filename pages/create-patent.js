@@ -40,7 +40,7 @@ export default function CreatePatentPage() {
 
   return (
     <>
-      <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <ThemeProvider theme={darkTheme}>
         <GlobalStyles />
         <Navbar />
         <FormContainer>
