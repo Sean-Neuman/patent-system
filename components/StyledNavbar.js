@@ -23,7 +23,7 @@ export const NavbarLinks = styled.div`
 `;
 
 export const LoginButton = styled.button`
-  background-color: #007bff;
+  background-color: ${({ theme }) => theme.buttoncolor};
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -31,6 +31,6 @@ export const LoginButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #0056b3;
+    background-color: ${({ theme }) => theme.buttonhover};
   }
 `;

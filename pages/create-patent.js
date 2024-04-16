@@ -20,7 +20,7 @@ export default function CreatePatentPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Process form data here. For example, you could send it to a backend server.
+    // Process form data here.
     console.log({ patentTitle, description, blueprint });
   };
 
@@ -28,15 +28,15 @@ export default function CreatePatentPage() {
     setBlueprint(e.target.files[0]);
   };
 
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
 
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+  // const toggleTheme = () => {
+  //   if (theme === "light") {
+  //     setTheme("dark");
+  //   } else {
+  //     setTheme("light");
+  //   }
+  // };
 
   return (
     <>

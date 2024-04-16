@@ -7,13 +7,17 @@ export const Div = styled.div`
   border: "1px solid #ccc";
   padding: "20px";
   margin: "10px";
+  background-color: ${({ theme }) => theme.cardbackground};
+  border-radius: 8px;
+  
+
 `;
 
 const PatentCard = ({ patent }) => (
   <Div>
     <h3>{patent.title}</h3>
     <p>{patent.description}</p>
-    <Link to={`/patents/${patent.id}`}>View Patent</Link>
+    {/* <Link to={`/patents/${patent.id}`}>View Patent</Link> */}
   </Div>
 );
 

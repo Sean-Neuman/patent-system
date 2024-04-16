@@ -7,7 +7,7 @@ const Navbar = () => (
     <GlobalStyles />
     <NavbarContainer>
       <NavbarLinks>
-        <a href="/_profile">Profile</a>
+        <a href="/ProfilePage">Profile</a>
         <a href="/explore">Explore</a>
         <a href="/create-patent">Create Patent</a>
       </NavbarLinks>

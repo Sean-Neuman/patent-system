@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import patents from "../mockPatents";
 import PatentCard from "../components/PatentCard";
 import Navbar from "@/components/Navbar";
+import { GlobalStyles } from "@/styles/GlobalStyles";
+import { darkTheme } from "@/styles/theme";
+import { ThemeProvider } from "styled-components";
 
 export default function Explore() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,6 +16,8 @@ export default function Explore() {
 
   return (
     <>
+    <ThemeProvider theme = {darkTheme}>
+    <GlobalStyles />
       <Navbar />
       <div>
         <input
@@ -28,6 +33,7 @@ export default function Explore() {
           ))}
         </div>
       </div>
+      </ThemeProvider>
     </>
   );
 }

@@ -12,15 +12,15 @@ import { GlobalStyles } from "../styles/GlobalStyles";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const [theme, setTheme] = useState("light");
+  // const [theme, setTheme] = useState("light");
 
-  const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
-  };
+  // const toggleTheme = () => {
+  //   if (theme === "light") {
+  //     setTheme("dark");
+  //   } else {
+  //     setTheme("light");
+  //   }
+  // };
   return (
     <ThemeProvider theme={darkTheme}>
       <>
