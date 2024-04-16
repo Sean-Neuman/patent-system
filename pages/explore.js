@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { GlobalStyles } from "@/styles/GlobalStyles";
 import { darkTheme } from "@/styles/theme";
 import { ThemeProvider } from "styled-components";
+import {TextInput} from "@/components/StyledCreatePatent"
 
 export default function Explore() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,12 +21,12 @@ export default function Explore() {
     <GlobalStyles />
       <Navbar />
       <div>
-        <input
+        <TextInput
           type="text"
           placeholder="Search patents..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ padding: "10px", margin: "10px" }}
+          style={{ padding: "10px", margin: "10px", }}
         />
         <div>
           {filteredPatents.map((patent) => (
