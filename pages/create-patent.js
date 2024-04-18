@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormContainer,
   Form,
@@ -12,16 +12,40 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../styles/theme";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Navbar from "../components/Navbar";
+import { ThirdwebStorage } from "thirdweb";
+import { ethers } from "ethers";
+import { useSigner } from "thirdweb";
 
 export default function CreatePatentPage() {
   const [patentTitle, setPatentTitle] = useState("");
   const [description, setDescription] = useState("");
   const [blueprint, setBlueprint] = useState(null);
 
-  const handleSubmit = (e) => {
+  const signer = useSigner();
+
+  useEffect(() => {
+    const AsyncFunction = async () => {
+      if (!signer) {
+        return;
+      }
+      const contract = new ethers.Contract(
+        "{{contract-address}}",
+        ["{{contract-abi}}"],
+        signer
+      );
+      const result = await contract.someFunction();
+      console.log(result);
+    };
+    AsyncFunction();
+  }, [signer]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Process form data here.
     console.log({ patentTitle, description, blueprint });
+    // use IPFS to upload the blueprint
+    //thirdweb storage for pinning
+    //var result = await ThirdwebStorage.Upload(client, "{{path/to-file}}");
   };
 
   const handleBlueprintChange = (e) => {
