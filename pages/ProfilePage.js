@@ -13,7 +13,7 @@ export default function ProfilePage() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyles />
-        <Navbar />
+     
         <PageContainer>
           <Title>User's Patents</Title>
           <PatentList>

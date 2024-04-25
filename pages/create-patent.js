@@ -12,9 +12,9 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "../styles/theme";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Navbar from "../components/Navbar";
-import { ThirdwebStorage } from "thirdweb";
+//import { ThirdwebStorage } from "thirdweb";
 import { ethers } from "ethers";
-import { useSigner } from "thirdweb";
+import { useSigner } from "@thirdweb-dev/react";
 
 export default function CreatePatentPage() {
   const [patentTitle, setPatentTitle] = useState("");
@@ -66,7 +66,7 @@ export default function CreatePatentPage() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyles />
-        <Navbar />
+        
         <FormContainer>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="patentTitle">Title</Label>

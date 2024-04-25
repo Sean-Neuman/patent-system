@@ -42,7 +42,7 @@ export default function Home() {
         <GlobalStyles />
         <div>
           {/* <button onClick={toggleTheme}>Toggle Theme</button> */}
-          <Navbar />
+       
           <AboutContainer>
             <Heading>About Einstein</Heading>
             <Paragraph>

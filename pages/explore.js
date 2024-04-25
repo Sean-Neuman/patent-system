@@ -19,7 +19,6 @@ export default function Explore() {
     <>
     <ThemeProvider theme = {darkTheme}>
     <GlobalStyles />
-      <Navbar />
       <div>
         <TextInput
           type="text"
