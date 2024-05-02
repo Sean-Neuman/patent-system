@@ -27,13 +27,15 @@ export default function ProfilePage() {
         return;
       }
       try {
+        //connects to a contract
         const contract = new ethers.Contract(
           "0xd0681465bf34587bea8fe94ccb52afa3b7f7fcd3",
           MPATABI,
           signer
         );
-
+        //gets all the token URIs
         const tokenURIs = await contract.getAllTokenURIsByAddress(signer.getAddress());
+        //downloads the metadata for each token
         const dataPromise = tokenURIs.map(async (uri, index) => {
           const data = await storage.download(uri);
           const metadata = await fetch(data.url);
@@ -41,6 +43,7 @@ export default function ProfilePage() {
           finalNFT.id = index;
           return finalNFT;
         });
+        //sets the state to all the NFTs
         const allNFTs = await Promise.all(dataPromise);
         setNfts(allNFTs);
         console.log(allNFTs);

@@ -8,11 +8,14 @@ import "@openzeppelin/contracts@5.0.2/access/Ownable.sol";
 
 contract MyToken is ERC721, ERC721URIStorage, Ownable {
     uint256 private _nextTokenId;
+    
 
-    constructor(
-        address initialOwner
-    ) ERC721("MyPatent", "MPAT") Ownable(initialOwner) {}
 
+    constructor(address initialOwner)
+        ERC721("MyPatent", "MPAT")
+        Ownable(initialOwner)
+    {}
+    // taken from OpenZepplin, takes in a address and a uri and mints a NFT to that address and saves id  to _nextTokenId
     function safeMint(address to, string memory uri) public {
         uint256 tokenId = _nextTokenId++;
         _safeMint(to, tokenId);
@@ -27,47 +30,53 @@ contract MyToken is ERC721, ERC721URIStorage, Ownable {
         }
         return uris;
     }
-
-    function getAllTokenURIsByAddress(
-        address to
-    ) external view returns (string[] memory) {
-        uint256 count = 0;
-        // First pass: count the number of tokens owned by the address
-        for (uint256 i = 0; i < _nextTokenId; i++) {
-            if (_ownerOf(i) == to) {
-                count++;
-            }
+// Function to get all token URIs for a specific address to
+function getAllTokenURIsByAddress(address to) external view returns (string[] memory) {
+    uint256 count = 0;
+    // First pass: count the number of tokens owned by the address
+    for (uint256 i = 0; i < _nextTokenId; i++) {
+        if (_ownerOf(i) == to) {
+            count++;
         }
-
-        // Second pass: allocate array and populate it
-        string[] memory uris = new string[](count);
-        uint256 index = 0;
-        for (uint256 i = 0; i < _nextTokenId; i++) {
-            if (_ownerOf(i) == to) {
-                uris[index] = tokenURI(i);
-                index++;
-            }
-        }
-
-        return uris;
     }
 
+    // Second pass: allocate array and populate it
+    string[] memory uris = new string[](count);
+    uint256 index = 0;
+    for (uint256 i = 0; i < _nextTokenId; i++) {
+        if (_ownerOf(i) == to) {
+            uris[index] = tokenURI(i);
+            index++;
+        }
+    }
+
+    return uris;
+}
+
+
     // Public function to get the current value of _nextTokenId
+    //Can be removed
     function getNextTokenId() public view returns (uint256) {
         return _nextTokenId;
     }
 
     // The following functions are overrides required by Solidity.
 
-    function tokenURI(
-        uint256 tokenId
-    ) public view override(ERC721, ERC721URIStorage) returns (string memory) {
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (string memory)
+    {
         return super.tokenURI(tokenId);
     }
 
-    function supportsInterface(
-        bytes4 interfaceId
-    ) public view override(ERC721, ERC721URIStorage) returns (bool) {
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721URIStorage)
+        returns (bool)
+    {
         return super.supportsInterface(interfaceId);
     }
 }

@@ -26,8 +26,8 @@ export default function CreatePatentPage() {
   const [patentTitle, setPatentTitle] = useState("");
   const [description, setDescription] = useState("");
   const [blueprint, setBlueprint] = useState(null);
-  const [isMinting, setIsMinting] = useState(false);
-  const [isMinted, setIsMinted] = useState(false);
+  // const [isMinting, setIsMinting] = useState(false);
+  // const [isMinted, setIsMinted] = useState(false);
   const storage = useStorage();
   const connectedAddress = useAddress();
   const signer = useSigner();
@@ -36,7 +36,8 @@ export default function CreatePatentPage() {
     if (!signer) {
       return;
     }
-    setIsMinting(true);
+    //shamelessly stolen from the example code, will want to implement tho
+    //setIsMinting(true);
     try {
       const metadata = {
         title: patentTitle,
@@ -44,18 +45,21 @@ export default function CreatePatentPage() {
         description: description,
         // image: imageGenerated.url
       };
+      //connects to a contract
       const contract = new ethers.Contract(
         "0xd0681465bf34587bea8fe94ccb52afa3b7f7fcd3",
         MPATABI,
         signer
       );
+      //uploads the metadata to the storage
       const url = await storage.upload(metadata);
+      //mints the NFT
       const tx = await contract.safeMint(connectedAddress, url);
       await tx.wait();
-      setIsMinting(false);
-      setIsMinted(true);
+      //setIsMinting(false);
+      //setIsMinted(true);
     } catch (err) {
-      setIsMinting(false);
+      //setIsMinting(false);
       console.log(err);
     }
   }
@@ -70,19 +74,11 @@ export default function CreatePatentPage() {
     //var result = await ThirdwebStorage.Upload(client, "{{path/to-file}}");
   };
 
+  //removed blueprint upload for now
+  //will want to impliment this later
   const handleBlueprintChange = (e) => {
     setBlueprint(e.target.files[0]);
   };
-
-  // const [theme, setTheme] = useState("light");
-
-  // const toggleTheme = () => {
-  //   if (theme === "light") {
-  //     setTheme("dark");
-  //   } else {
-  //     setTheme("light");
-  //   }
-  // };
 
   return (
     <>
