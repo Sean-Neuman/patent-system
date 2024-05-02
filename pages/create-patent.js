@@ -14,35 +14,57 @@ import { GlobalStyles } from "../styles/GlobalStyles";
 import Navbar from "../components/Navbar";
 //import { ThirdwebStorage } from "thirdweb";
 import { ethers } from "ethers";
-import { useSigner } from "@thirdweb-dev/react";
+import {
+  useSigner,
+  useAddress,
+  useStorage,
+  useStorageUpload,
+} from "@thirdweb-dev/react";
+import MPATABI from "@/library/MPAT.json";
 
 export default function CreatePatentPage() {
   const [patentTitle, setPatentTitle] = useState("");
   const [description, setDescription] = useState("");
   const [blueprint, setBlueprint] = useState(null);
-
+  const [isMinting, setIsMinting] = useState(false);
+  const [isMinted, setIsMinted] = useState(false);
+  const storage = useStorage();
+  const connectedAddress = useAddress();
   const signer = useSigner();
 
-  useEffect(() => {
-    const AsyncFunction = async () => {
-      if (!signer) {
-        return;
-      }
+  async function mintNFT() {
+    if (!signer) {
+      return;
+    }
+    setIsMinting(true);
+    try {
+      const metadata = {
+        title: patentTitle,
+        creator: connectedAddress,
+        description: description,
+        // image: imageGenerated.url
+      };
       const contract = new ethers.Contract(
-        "{{contract-address}}",
-        ["{{contract-abi}}"],
+        "0xd0681465bf34587bea8fe94ccb52afa3b7f7fcd3",
+        MPATABI,
         signer
       );
-      const result = await contract.someFunction();
-      console.log(result);
-    };
-    AsyncFunction();
-  }, [signer]);
+      const url = await storage.upload(metadata);
+      const tx = await contract.safeMint(connectedAddress, url);
+      await tx.wait();
+      setIsMinting(false);
+      setIsMinted(true);
+    } catch (err) {
+      setIsMinting(false);
+      console.log(err);
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Process form data here.
     console.log({ patentTitle, description, blueprint });
+    mintNFT();
     // use IPFS to upload the blueprint
     //thirdweb storage for pinning
     //var result = await ThirdwebStorage.Upload(client, "{{path/to-file}}");
@@ -66,7 +88,7 @@ export default function CreatePatentPage() {
     <>
       <ThemeProvider theme={darkTheme}>
         <GlobalStyles />
-        
+
         <FormContainer>
           <Form onSubmit={handleSubmit}>
             <Label htmlFor="patentTitle">Title</Label>
@@ -85,15 +107,17 @@ export default function CreatePatentPage() {
               required
             />
 
-            <Label htmlFor="blueprint">Blueprint Upload</Label>
+            {/* <Label htmlFor="blueprint">Blueprint Upload</Label>
             <FileInput
               id="blueprint"
               type="file"
               onChange={handleBlueprintChange}
               required
-            />
+            /> */}
 
-            <SubmitButton type="submit">Submit Patent</SubmitButton>
+            <SubmitButton onClick={handleSubmit} type="submit">
+              Submit Patent
+            </SubmitButton>
           </Form>
         </FormContainer>
       </ThemeProvider>
