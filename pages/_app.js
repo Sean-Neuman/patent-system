@@ -22,7 +22,7 @@ function App({ Component, pageProps }) {
       <GlobalStyles />
       <ThirdwebProvider
         activeChain="binance-testnet"
-        clientId="56a391e3dfd93b02d43834363461a36c"
+        clientId="1156c0c240b1cf53b5fbba1db35729d9"
       >
         <NavbarContainer>
           <NavbarLinks>
